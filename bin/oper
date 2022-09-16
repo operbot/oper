@@ -6,6 +6,7 @@
 "operator bot"
 
 
+import importlib
 import os
 import readline
 import signal
@@ -18,16 +19,8 @@ sys.path.insert(0, os.getcwd())
 
 
 from op import Wd, format, keys, update
-from opr import Cfg, Client, Event, docmd, parse, scan, scandir, wait
-from oper.irc import Config, IRC
-from oper.rss import Fetcher
-
-
-Config.nick = "oper"
-Config.channel = "#oper"
-Config.realname = "operator bot"
-Config.username = "oper"
-
+from op.run import Cfg, Client, Event, docmd, parse, scan, scandir, wait
+from op.run.trc import from_exception
 
 Wd.workdir = os.path.expanduser("~/.oper")
 
@@ -101,6 +94,12 @@ def isopt(ostr):
             return True
     return False
 
+def scanpkg(name):
+    pname = name.split(".")[0]
+    mod = importlib.import_module(name, pname)
+    path = mod.__path__[0]
+    scandir(path, importer)
+
 
 def wrap(func):
     fds = sys.stdin.fileno()
@@ -124,7 +123,7 @@ def main():
     txt = ' '.join(sys.argv[1:])
     cfg = parse(txt)
     update(Cfg, cfg)
-    scandir("oper", importer)
+    scanpkg("op.mod")
     if cfg.txt:
         cli = CLI()
         docmd(cli, cfg.otxt)

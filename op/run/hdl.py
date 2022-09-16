@@ -11,9 +11,11 @@ import time
 
 
 from op import Object
-from opr.bus import Bus
-from opr.cbs import Callbacks
-from opr.thr import launch
+
+
+from .bus import Bus
+from .cbs import Callbacks
+from .thr import launch
 
 
 def __dir__():

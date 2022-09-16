@@ -10,7 +10,7 @@ import time
 
 
 from op import Object, elapsed, get, name, update
-from opr import Bus
+from op.run import Bus
 
 
 def __dir__():

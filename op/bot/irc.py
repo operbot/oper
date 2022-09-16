@@ -15,10 +15,10 @@ import _thread
 
 from op import Class, Default, Object, edit, elapsed, format, keys, save, update
 from op.dbs import find, fntime, locked, last
-from opr import Callbacks, Client, launch
+from op.run import Callbacks, Client, launch
 
 
-import opr
+import op.run
 
 
 def __dir__():
@@ -84,10 +84,10 @@ class Config(Default):
 Class.add(Config)
 
 
-class Event(opr.Event):
+class Event(op.run.Event):
 
     def __init__(self):
-        opr.Event.__init__(self)
+        op.run.Event.__init__(self)
         self.args = []
         self.arguments = []
         self.channel = ""
