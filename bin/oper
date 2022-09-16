@@ -18,7 +18,7 @@ sys.path.insert(0, os.getcwd())
 
 
 from op import Wd, format, keys, update
-from opr import Cfg, Client, Event, docmd, parse, scan, wait
+from opr import Cfg, Client, Event, docmd, parse, scan, scandir, wait
 from oper.irc import Config, IRC
 from oper.rss import Fetcher
 
@@ -59,7 +59,7 @@ class Console(CLI):
 
 def banner(cfg):
     print(
-          "OPERBOT started at %s %s" % (
+          "OPER started at %s %s" % (
                                      time.ctime(time.time()).replace("  ", " "),
                                      format(cfg, "debug,verbose")
                                     )
@@ -89,6 +89,7 @@ def importer(packagename, modulename):
     name = "%s.%s" % (packagename, modulename)
     try:
         mod = importlib.import_module(name, packagename)
+        print(mod)
         scan(mod)
     except Exception as ex:
         print(from_exception(ex))
@@ -123,6 +124,7 @@ def main():
     txt = ' '.join(sys.argv[1:])
     cfg = parse(txt)
     update(Cfg, cfg)
+    scandir("oper", importer)
     if cfg.txt:
         cli = CLI()
         docmd(cli, cfg.otxt)
