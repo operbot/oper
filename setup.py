@@ -17,7 +17,7 @@ setup(
     description="operator bot",
     long_description=read(),
     license="Public Domain",
-    packages=["op", "oper"],
+    packages=["op", "opr", "oper"],
     scripts=["bin/op", "bin/oper"],
     classifiers=[
         "Development Status :: 4 - Beta",
