@@ -10,7 +10,7 @@ import os
 import unittest
 
 
-from op import *
+from op.all import *
 
 
 Wd.workdir = ".test"

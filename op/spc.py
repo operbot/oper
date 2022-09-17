@@ -38,10 +38,10 @@ def __dir__():
            )
 
 
-from .cls import Class
-from .dbs import Db, find, fns, fntime, hook, last
-from .dft import Default
-from .jsn import dump, dumps, load, loads, save
-from .obj import *
-from .utl import cdir, elapsed
-from .wdr import Wd
+from op.cls import Class
+from op.dbs import Db, find, fns, fntime, hook, last
+from op.dft import Default
+from op.jsn import dump, dumps, load, loads, save
+from op.obj import *
+from op.utl import cdir, elapsed
+from op.wdr import Wd

@@ -7,7 +7,7 @@ import os
 import types
 
 
-from .cls import Class
+from op.cls import Class
 
 
 def __dir__():
@@ -48,9 +48,6 @@ class Object:
                 self.__dict__.update(vars(args[0]))
             except TypeError:
                 self.__dict__.update(args[0])
-
-    def __contains__(self, key):
-        return key in self.__dict__
 
     def __iter__(self):
         return iter(self.__dict__)

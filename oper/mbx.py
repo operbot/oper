@@ -10,8 +10,11 @@ import os
 import time
 
 
-from op import Class, Db, elapsed, find, fntime
-from op import Object, format, save, update
+from op.cls import Class
+from op.dbs import Db, find, fntime
+from op.utl import elapsed
+from op.obj import Object, format, update
+from op.jsn import save
 
 
 def __dir__():
