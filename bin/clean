@@ -16,9 +16,7 @@ def popen(txt):
 
 popen("rm -fR build dist MANIFEST *~ .op oper.egg-info __pycache__ .pytest_cache")
 popen("rm -fR op/*~ op/__pycache__")
-popen("rm -fR op/run/*~ op/run/__pycache__")
-popen("rm -fR op/bot/*~ op/bot/__pycache__")
-popen("rm -fR op/mod/*~ op/mod/__pycache__")
-popen("rm -fR op/srv/*~ op/srv/__pycache__")
+popen("rm -fR oper/*~ oper/__pycache__")
+popen("rm -fR operbot/*~ operbot/__pycache__")
 popen("rm -fR bin/*~ bin/__pycache__")
 popen("rm -fR .test test/__pycache__ test/*~")
