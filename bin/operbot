@@ -6,7 +6,6 @@
 "operator bot"
 
 
-import importlib
 import os
 import readline
 import signal
@@ -19,10 +18,31 @@ sys.path.insert(0, os.getcwd())
 
 
 from op import Wd, format, keys, update
-from op.run import Cfg, Client, Event, docmd, parse, scan, scandir, wait
-from op.run.trc import from_exception
+from oper import Cfg, Client, Event, docmd, parse, scan, wait
 
-Wd.workdir = os.path.expanduser("~/.oper")
+
+from operbot import bsc, dbg, log, sts, tdo
+from operbot import irc, rss
+from operbot.irc import Config, IRC
+from operbot.rss import Fetcher
+
+
+Config.nick = "operbot"
+Config.channel = "#operbot"
+Config.realname = "operator bot"
+Config.username = "operbot"
+
+
+Wd.workdir = os.path.expanduser("~/.operbot")
+
+
+scan(bsc)
+scan(dbg)
+scan(irc)
+scan(log)
+scan(rss)
+scan(sts)
+scan(tdo)
 
 
 class CLI(Client):
@@ -52,7 +72,7 @@ class Console(CLI):
 
 def banner(cfg):
     print(
-          "OPER started at %s %s" % (
+          "OPERBOT started at %s %s" % (
                                      time.ctime(time.time()).replace("  ", " "),
                                      format(cfg, "debug,verbose")
                                     )
@@ -78,27 +98,11 @@ def hup(_sig, _frame):
     sys.stdout.flush()
 
 
-def importer(packagename, modulename):
-    name = "%s.%s" % (packagename, modulename)
-    try:
-        mod = importlib.import_module(name, packagename)
-        print(mod)
-        scan(mod)
-    except Exception as ex:
-        print(from_exception(ex))
-
-
 def isopt(ostr):
     for opt in ostr:
         if opt in Cfg.opts:
             return True
     return False
-
-def scanpkg(name):
-    pname = name.split(".")[0]
-    mod = importlib.import_module(name, pname)
-    path = mod.__path__[0]
-    scandir(path, importer)
 
 
 def wrap(func):
@@ -123,7 +127,6 @@ def main():
     txt = ' '.join(sys.argv[1:])
     cfg = parse(txt)
     update(Cfg, cfg)
-    scanpkg("op.mod")
     if cfg.txt:
         cli = CLI()
         docmd(cli, cfg.otxt)
