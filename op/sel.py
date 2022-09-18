@@ -1,5 +1,5 @@
 # This file is placed in the Public Domain.
-# pylint: disable=C0112,C0103,C0114,C0115,C0116,R0903
+# pylint: disable=R0903
 
 
 "selector"
@@ -16,4 +16,4 @@ def __dir__():
 
 class Selector(Default):
 
-    pass
+    "selector object."

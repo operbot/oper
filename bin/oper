@@ -18,7 +18,7 @@ sys.path.insert(0, os.getcwd())
 
 
 from op.wdr import Wd
-from op.obj import format, keys, update
+from op.obj import keys, printable, update
 from opr.clt import Client
 from opr.evt import Event, docmd
 from opr.prs import parse
@@ -75,7 +75,7 @@ def banner(cfg):
     print(
           "OPER started at %s %s" % (
                                      time.ctime(time.time()).replace("  ", " "),
-                                     format(cfg, "debug,verbose")
+                                     printable(cfg, "debug,verbose")
                                     )
          )
 
@@ -140,7 +140,7 @@ def main():
         bot = IRC()
         bot.start()
         if isopt("v"):
-            print(format(bot.cfg, "nick,channel,server,port,sasl"))
+            print(printable(bot.cfg, "nick,channel,server,port,sasl"))
     if isopt("r"):
         fetcher = Fetcher()
         fetcher.start()

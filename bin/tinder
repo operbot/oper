@@ -18,7 +18,7 @@ import traceback
 sys.path.insert(0, os.getcwd())
 
 
-from op import Object, Wd, get, format, name, keys, elapsed
+from op import Object, Wd,  elapsed, get, keys, name, printable
 from oper import Cfg, Client, Commands, Event, parse, scandir, scan
 from oper.trc import from_exception
 
@@ -127,7 +127,7 @@ def main():
     cfg = parse(txt)
     if "v" in cfg.opts:
         Cfg.verbose = True
-    cprint(format(Cfg, keys(Cfg)))
+    cprint(printable(Cfg, keys(Cfg)))
     scandir("op", importer)
     scandir("oper", importer)
     scandir("opermod", importer)

@@ -1,5 +1,7 @@
 # This file is placed in the Public Domain.
-# pylint: disable=W0622,W0614,W0611,W0401,W0614,C0114
+# pylint: disable=W0611,W0614,W0401
+
+"specification"
 
 
 from op.cls import Class
@@ -36,12 +38,4 @@ def __dir__():
             'save',
             'update',
             'values',
-            'cls',
-            'dbs',
-            'dft',
-            'jsn',
-            'obj',
-            'sel',
-            'utl',
-            'wdr'
            )
