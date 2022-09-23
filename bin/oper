@@ -19,17 +19,15 @@ sys.path.insert(0, os.getcwd())
 
 from op.wdr import Wd
 from op.obj import keys, printable, update
-from opr.clt import Client
-from opr.evt import Event, docmd
-from opr.prs import parse
-from opr.scn import scan
-from opr.utl import wait
-
-
-from oper import cmd, irc, rss
-from oper.irc import Config, IRC
-from oper.rss import Fetcher
-from oper.run import Cfg
+from oh.clt import Client
+from oh.evt import Event, docmd
+from oh.prs import parse
+from oh.scn import scan
+from oh.utl import wait
+from om.irc import Config, IRC
+from om.rss import Fetcher
+from om.run import Cfg
+from om import cmd, irc, rss
 
 
 Config.nick = "oper"
