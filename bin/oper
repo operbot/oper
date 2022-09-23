@@ -6,6 +6,7 @@
 "operator bot"
 
 
+import importlib
 import os
 import readline
 import signal
@@ -17,31 +18,13 @@ import time
 sys.path.insert(0, os.getcwd())
 
 
-from op.wdr import Wd
-from op.obj import keys, printable, update
-from oh.clt import Client
-from oh.evt import Event, docmd
-from oh.prs import parse
-from oh.scn import scan
-from oh.utl import wait
-from om.irc import Config, IRC
-from om.rss import Fetcher
-from om.run import Cfg
-from om import cmd, irc, rss
-
-
-Config.nick = "oper"
-Config.channel = "#oper"
-Config.realname = "object programming demo"
-Config.username = "oper"
+from op import Wd, keys, printable, update, wait
+from oper import Client, Event, docmd, parse, scan, scandir
+from oper.run import Cfg
 
 
 Wd.workdir = os.path.expanduser("~/.oper")
-
-
-scan(cmd)
-scan(irc)
-scan(rss)
+Wd.moddir = os.path.join(Wd.workdir, "mod")
 
 
 class CLI(Client):
@@ -97,6 +80,12 @@ def hup(_sig, _frame):
     sys.stdout.flush()
 
 
+def importer(pname, mname):
+    fqn = "%s.%s" % (pname, mname)
+    mod = importlib.import_module(fqn, pname)
+    scan(mod)
+
+
 def isopt(ostr):
     for opt in ostr:
         if opt in Cfg.opts:
@@ -126,6 +115,7 @@ def main():
     txt = ' '.join(sys.argv[1:])
     cfg = parse(txt)
     update(Cfg, cfg)
+    scandir(Wd.moddir, importer)
     if cfg.txt:
         cli = CLI()
         docmd(cli, cfg.otxt)
@@ -134,20 +124,12 @@ def main():
         daemon()
     if isopt("ci"):
         banner(cfg)
-    if isopt("di"):
-        bot = IRC()
-        bot.start()
-        if isopt("v"):
-            print(printable(bot.cfg, "nick,channel,server,port,sasl"))
-    if isopt("r"):
-        fetcher = Fetcher()
-        fetcher.start()
-    if isopt("ci") and not isopt("d"):
+    if isopt("c") and not isopt("d"):
         csl = Console()
         csl.start()
         csl.forever()
     if isopt("d"):
         wait()
-        
+
 
 wrap(main)
