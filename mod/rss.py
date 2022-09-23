@@ -16,7 +16,7 @@ from urllib.request import Request, urlopen
 from op import Class, Db, Default, Object, fntime
 from op import edit, elapsed, find, get, last, register, save, spl, update
 from oper import Bus, Repeater, launch
-from operbot.run import Cfg
+from oper.run import Cfg
 
 
 def __dir__():

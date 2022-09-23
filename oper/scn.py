@@ -42,13 +42,14 @@ def scandir(path, func):
     res = []
     if not os.path.exists(path):
         return res
-    for _fn in os.listdir(path):
-        if _fn.endswith("~") or _fn.startswith("__"):
+    try:
+        pname = os.path.split(path)
+    except ValueError:
+        pname = path.split(os.sep)
+    pname = pname[-1]
+    for fnm in os.listdir(path):
+        if fnm.endswith("~") or fnm.startswith("__"):
             continue
-        try:
-            pname = _fn.split(os.sep)[-2]
-        except IndexError:
-            pname = path
-        mname = _fn.split(os.sep)[-1][:-3]
+        mname = fnm.split(os.sep)[-1][:-3]
         res.append(func(pname, mname))
     return res

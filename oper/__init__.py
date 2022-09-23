@@ -4,6 +4,7 @@
 from .bus import Bus
 from .cbs import Callbacks
 from .cfg import Config
+from .cli import docmd
 from .clt import Client
 from .com import Command, dispatch
 from .evt import Event
@@ -27,6 +28,7 @@ def __dir__():
             'Thread',
             'Timer',
             'dispatch',
+            'docmd',
             'launch',
             'parse',
             'scan',
