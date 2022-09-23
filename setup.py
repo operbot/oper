@@ -14,10 +14,10 @@ setup(
     author="Bart Thate",
     author_email="operbot100@gmail.com",
     url="http://github.com/operbot/oper",
-    description="operator bot",
+    description="write your own commands",
     long_description=read(),
     license="Public Domain",
-    packages=["op", "or", "om"],
+    packages=["op", "oper"],
     scripts=["bin/op", "bin/oper"],
     classifiers=[
         "Development Status :: 4 - Beta",
